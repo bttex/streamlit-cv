@@ -16,7 +16,7 @@ PAGE_TITLE = "CV Digital| Bruno Teixeira"
 PAGE_ICON = ":wave:"
 NAME = "Bruno Teixeira"
 DESCRIPTION = """
-Analista de dados Jr, auxiliando empresas no suporte à tomada de decisões baseada em dados.
+Analista de dados, auxiliando empresas no suporte à tomada de decisões baseada em dados.
 """
 EMAIL = "itbttex@icloud.com"
 SOCIAL_MEDIA = {
