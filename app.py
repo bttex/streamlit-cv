@@ -12,7 +12,7 @@ profile_pic = current_dir / "assets" / "profile-pic.png"
 
 
 # --- GENERAL SETTINGS ---
-PAGE_TITLE = "CV Digital| Bruno Teixeira"
+PAGE_TITLE = "CV Digital | Bruno Teixeira"
 PAGE_ICON = ":wave:"
 NAME = "Bruno Teixeira"
 DESCRIPTION = """
@@ -70,6 +70,7 @@ st.write('\n')
 st.subheader("Experiência")
 st.write(
     """
+- ✔️ Cursando Ciência de Dados na Universidade Descomplica - Ago/2024 - Presente
 - ✔️ 5 Anos de experiência na área de dados
 - ✔️ Grande experiência prática e conhecimento em Python, Excel e SQL
 - ✔️ Boa compreensão dos princípios estatísticos e suas respectivas aplicações
