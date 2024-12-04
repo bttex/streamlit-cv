@@ -140,3 +140,15 @@ st.subheader("Projetos")
 st.write("---")
 for project, link in PROJECTS.items():
     st.write(f"[{project}]({link})")
+
+st.write('\n')
+st.subheader("Cursos")
+st.write("---")
+
+col3,col4,col5 = st.columns(3, gap="small")
+with col3:
+    st.image(image="assets/introduction-to-cybersecurity.png")
+with col4:
+    st.image(image="assets/introduction-to-data-science.png")
+with col5:
+    st.image(image="assets/python-essentials-1.1.png")
