@@ -2,7 +2,7 @@ from pathlib import Path
 import streamlit as st
 from PIL import Image
 import requests
-
+import os
 # --- PATH SETTINGS ---
 current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 css_file = current_dir / "styles" / "main.css"
@@ -157,12 +157,19 @@ for job_title, job_date, job_desc in WORK_HISTORY[language]:
     st.write(f"{job_title} ({job_date})")
     st.write(job_desc)
 
+token = os.getenv("GITHUB_TOKEN")
 
 def get_github_projects(username):
+    token = os.getenv("GITHUB_TOKEN")  # Busca o token da variável de ambiente
+    headers = {"Authorization": f"token {token}"} if token else {}
     url = f"https://api.github.com/users/{username}/repos?sort=created&direction=desc"
-    response = requests.get(url)
-    return response.json()
 
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print("Erro na API:", response.status_code, response.text)
+        return []
 # Mapeamento dos nomes dos repositórios para os nomes desejados
 repo_name_mapping = {
     "telegrambot": {
@@ -191,7 +198,6 @@ projects = get_github_projects(github_username)
 # Filtrar os repositórios que você deseja exibir
 desired_repositories = ["telegrambot", "tnt_tracker", "github_tracker"]
 filtered_projects = [project for project in projects if project['name'] in desired_repositories]
-
 # --- Projects & Accomplishments ---
 st.write('\n')
 st.subheader("Projetos" if language == "Português" else "Projects")
