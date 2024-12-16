@@ -1,6 +1,7 @@
 from pathlib import Path
 import streamlit as st
 from PIL import Image
+import requests
 
 # --- PATH SETTINGS ---
 current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
@@ -26,9 +27,9 @@ SOCIAL_MEDIA = {
     "GitHub": "https://github.com/bttex",
 }
 PROJECTS = {
-    "🏆 Weather App - Checando o clima através de API": "https://github.com/bttex/weather-app",
-    "🏆 Telegram Bot - Um bot que faz webscraping e captura informações de servidores": "https://github.com/bttex/telegrambot",
-    "🏆 Discord Bot - Bot para agendamento de mensagens personalizadas": "https://github.com/bttex/Discord-bot",
+    "🏆 GitHub Tracker - Monitora o status de builds no GitHub Actions e novas releases de um repositório": "https://github.com/bttex/github_tracker",
+    "🏆 TNT Tracker - Automatiza o rastreamento de encomendas no portal da TNT Brasil": "https://github.com/bttex/tnt_tracker",
+    "🏆 Telegram Bot - Um bot que faz web scraping e captura informações de servidores": "https://github.com/bttex/telegrambot",
 }
 
 EXPERIENCE = {
@@ -156,12 +157,57 @@ for job_title, job_date, job_desc in WORK_HISTORY[language]:
     st.write(f"{job_title} ({job_date})")
     st.write(job_desc)
 
+
+def get_github_projects(username):
+    url = f"https://api.github.com/users/{username}/repos?sort=created&direction=desc"
+    response = requests.get(url)
+    return response.json()
+
+# Mapeamento dos nomes dos repositórios para os nomes desejados
+repo_name_mapping = {
+    "telegrambot": {
+        "Português": "Telegram Bot - Um bot que faz web scraping e captura informações de servidores",
+        "English": "Telegram Bot - A bot that does web scraping and captures server information"
+    },
+    "tnt_tracker": {
+        "Português": "TNT Tracker - Automatiza o rastreamento de encomendas no portal da TNT Brasil",
+        "English": "TNT Tracker - Automates package tracking on TNT Brasil portal"
+    },
+    "github_tracker": {
+        "Português": "GitHub Tracker - Monitora o status de builds no GitHub Actions e novas releases de um repositório",
+        "English": "GitHub Tracker - Monitors build status on GitHub Actions and new releases of a repository"
+    },
+}
+
+def get_normalized_name(repo_name, language):
+    return repo_name_mapping.get(repo_name, {}).get(language, repo_name.capitalize())
+
+# Seu nome de usuário no GitHub
+github_username = "bttex"
+
+# Obter os projetos
+projects = get_github_projects(github_username)
+
+# Filtrar os repositórios que você deseja exibir
+desired_repositories = ["telegrambot", "tnt_tracker", "github_tracker"]
+filtered_projects = [project for project in projects if project['name'] in desired_repositories]
+
 # --- Projects & Accomplishments ---
 st.write('\n')
 st.subheader("Projetos" if language == "Português" else "Projects")
 st.write("---")
-for project, link in PROJECTS.items():
-    st.write(f"[{project}]({link})")
+# Exibir os 3 primeiros projetos
+# Exibir os projetos com os nomes normalizados
+for project in filtered_projects[:3]:  # Limite para os 3 primeiros
+    repo_name = project['name']
+    normalized_name = get_normalized_name(repo_name, language)
+    repo_description = project.get('description', 'Sem descrição')
+    
+    st.write(f"{normalized_name}")
+    st.write(f"Link: {project['html_url']}")
+    st.write('---')
+    
+
 
 st.write('\n')
 st.subheader("Cursos" if language == "Português" else "Courses")
