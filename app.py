@@ -9,6 +9,7 @@ css_file = current_dir / "styles" / "main.css"
 resume_file = current_dir / "assets" / "CV.pdf"
 profile_pic = current_dir / "assets" / "profile-pic.png"
 
+st.set_page_config(page_title="CV Digital | Bruno Teixeira", page_icon=":wave:",layout='centered')
 
 # --- GENERAL SETTINGS ---
 PAGE_TITLE = "CV Digital | Bruno Teixeira"
