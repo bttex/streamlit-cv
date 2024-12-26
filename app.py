@@ -11,9 +11,6 @@ profile_pic = current_dir / "assets" / "profile-pic.png"
 
 st.set_page_config(page_title="CV Digital | Bruno Teixeira", page_icon=":wave:",layout='centered')
 
-# --- GENERAL SETTINGS ---
-PAGE_TITLE = "CV Digital | Bruno Teixeira"
-PAGE_ICON = ":wave:"
 NAME = {
     "Português": "Bruno Teixeira",
     "English": "Bruno Teixeira"
