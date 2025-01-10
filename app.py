@@ -62,7 +62,7 @@ HARD_SKILLS = {
 
 WORK_HISTORY = {
     "Português": [
-        ("🚧 Analista de Dados Jr | Vertex Digital", "01/2023 - Presente", """
+        ("🚧 Analista de Dados Pleno | Vertex Digital", "01/2023 - Presente", """
 - ► Geração de R$5000 em economia de custos anuais ao implementar um novo processo de ETL, reduzindo recursos gastos.
 - ► Criação de novos processos de ETL e automações para melhorias em tempo real de relatórios e dashboards.
 - ► Criação de novos projetos em Streamlit e manutenção e criação de banco de dados SQL Server.
@@ -80,7 +80,7 @@ WORK_HISTORY = {
         """),
     ],
     "English": [
-        ("🚧 Data Analyst Jr | Vertex Digital", "01/2023 - Present", """
+        ("🚧Mid-level Data Analyst  | Vertex Digital", "01/2023 - Present", """
 - ► Generated R$5000 in annual cost savings by implementing a new ETL process, reducing resource usage.
 - ► Created new ETL processes and automations for real-time improvements to reports and dashboards.
 - ► Developed new Streamlit projects and maintained SQL Server databases.
