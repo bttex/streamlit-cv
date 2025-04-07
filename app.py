@@ -158,16 +158,27 @@ for job_title, job_date, job_desc in WORK_HISTORY[language]:
 token = os.getenv("GITHUB_TOKEN")
 
 def get_github_projects(username):
-    token = os.getenv("GITHUB_TOKEN")  # Busca o token da variável de ambiente
+    token = os.getenv("GITHUB_TOKEN")
     headers = {"Authorization": f"token {token}"} if token else {}
-    url = f"https://api.github.com/users/{username}/repos?sort=created&direction=desc"
+    all_repos = []
+    page = 1
 
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        print("Erro na API:", response.status_code, response.text)
-        return []
+    while True:
+        url = f"https://api.github.com/users/{username}/repos?per_page=100&page={page}"
+        response = requests.get(url, headers=headers)
+
+        if response.status_code != 200:
+            print("Erro na API:", response.status_code, response.text)
+            return []
+
+        repos = response.json()
+        if not repos:
+            break
+
+        all_repos.extend(repos)
+        page += 1
+
+    return all_repos
 # Mapeamento dos nomes dos repositórios para os nomes desejados
 repo_name_mapping = {
     "telegrambot": {
